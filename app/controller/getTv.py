@@ -4,10 +4,10 @@ from util.dbTool import *
 
 app = Flask(__name__)
 
-@app.route('/getMovies')
-def getMovies():
+@app.route('/getTv')
+def getTv():
     conn = mysql_conn()
-    sql = "select * from movie where episode=0 limit 10"
+    sql = "select * from movie where episode!=0 limit 10"
     result_list = mysql_sel(conn, sql, '')
     conn.close
     temp_list = []
