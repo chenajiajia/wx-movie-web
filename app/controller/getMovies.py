@@ -1,6 +1,6 @@
 from flask import Flask
 import json
-from app.controller.util.dbTool import *
+from util.dbTool import *
 
 app = Flask(__name__)
 
