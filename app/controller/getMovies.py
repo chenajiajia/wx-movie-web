@@ -1,15 +1,19 @@
 from flask import Flask
-import json
+from flask import request
 from util.dbTool import *
+import json
 
 app = Flask(__name__)
 
-@app.route('/getMovies')
+@app.route('/getMovies', methods=['GET'])
 def getMovies():
+    args = request.args.to_dict()
+    start = args.get("limit","0")
     conn = mysql_conn()
-    sql = "select * from movie where episode=0 limit 10"
-    result_list = mysql_sel(conn, sql, '')
-    conn.close
+    sql = "select * from movie where episode=%s limit %s,%s"
+    param = ('0', int(start), 10)
+    result_list = mysql_sel(conn, sql, param)
+    mysql_close(conn)
     temp_list = []
     for row in result_list:
         result = {}
