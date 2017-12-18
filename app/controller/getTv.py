@@ -28,7 +28,7 @@ def getTv():
         result_list = mysql_sel(conn, sql, param)
         mysql_close(conn)
         if len(result_list) == 0:
-            status = 0
+            status = 1
             message = "Can not find more video"
         for row in result_list:
             result = {}

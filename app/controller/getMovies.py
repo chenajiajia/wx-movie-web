@@ -28,7 +28,7 @@ def getMovies():
         result_list = mysql_sel(conn, sql, param)
         mysql_close(conn)
         if len(result_list) == 0:
-            status = 0
+            status = 1
             message = "Can not find more video"
         for row in result_list:
             result = {}
@@ -50,6 +50,7 @@ def getMovies():
             # result['description'] = row[15].replace(' ', '').replace('\t\t', '\n')
             # result['imageUrls'] = row[16].decode('utf8').strip(';').split(';')
             temp_list.append(result)
+
     temp_json = {'status': status, 'message': message, 'data': temp_list}
     result_json = json.dumps(temp_json)
 

@@ -27,7 +27,9 @@ def mysql_close(conn):
     :param conn: mysql_connector
     :return:
     '''
-    conn.close()
+    if conn.is_connected:
+        conn.close()
+
     print('connect close!')
 
 #MySQL select
@@ -38,8 +40,11 @@ def mysql_sel(conn, sqlStr, param):
     :param param: 参数
     :return: results or None
     '''
+    if not conn.is_connected():
+        print("Connection is disconnected")
+        return None
     cursor = conn.cursor()
-    print(sqlStr+str(param))
+    #print(sqlStr+str(param))
     try:
         cursor.execute(sqlStr, param)
         results = cursor.fetchall()
@@ -59,7 +64,11 @@ def mysql_ins(conn, sqlStr, param):
     :param param: 参数
     :return: 0失败/1成功
     '''
+    if not conn.is_connected():
+        print("Connection is disconnected")
+        return 0
     cursor = conn.cursor()
+    # print(sqlStr+str(param))
     try:
         cursor.execute(sqlStr, param)
         conn.commit()
@@ -80,7 +89,11 @@ def mysql_upd(conn, sqlStr, param):
     :param param: 参数
     :return: 0失败/1成功
     '''
+    if not conn.is_connected():
+        print("Connection is disconnected")
+        return 0
     cursor = conn.cursor()
+    # print(sqlStr+str(param))
     try:
         cursor.execute(sqlStr, param)
         conn.commit()
@@ -101,7 +114,11 @@ def mysql_del(conn, sqlStr, param):
     :param param: 参数
     :return: 0失败/1成功
     '''
+    if not conn.is_connected():
+        print("Connection is disconnected")
+        return 0
     cursor = conn.cursor()
+    # print(sqlStr+str(param))
     try:
         cursor.execute(sqlStr, param)
         conn.commit()
