@@ -32,7 +32,7 @@ def getSubjectDetail():
         status = 0
         message = "Can not find this video"
 
-    # 查询结果为list，转换为dictionary再转换为json传回请求者
+    # 查询结果转换为dictionary再转换为json传回请求者
     temp_list = []
     if status != 0:
         for row in result_list:
@@ -54,8 +54,7 @@ def getSubjectDetail():
             result['otherName'] = row[14]
             result['description'] = row[15].replace(' ', '').replace('\t\t', '\n')
             result['imageUrls'] = row[16].decode('utf8').strip(';').split(';')
-            temp_list.append(result)
-    temp_json = {'status': status, 'message': message, 'data': temp_list}
+    temp_json = {'status': status, 'message': message, 'data': result}
     result_json = json.dumps(temp_json)
 
     return result_json
