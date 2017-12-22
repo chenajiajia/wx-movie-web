@@ -1,6 +1,5 @@
 #from app import app
 from flask import Flask
-
 from app.controller.movie import movie
 from app.controller.subscription import subscription
 from app.controller.user import user
