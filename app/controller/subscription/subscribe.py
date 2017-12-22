@@ -1,17 +1,20 @@
-from flask import Flask
 from flask import request
-from util.dbTool import *
+from ..util.dbTool import *
+from . import subscription
 import json
 
-app = Flask(__name__)
 
-@app.route('/collect', methods=['GET'])
-def collect():
-    # 获取get中的参数，get参数为request中的args，to_dict（）将其转为字典
-    args = request.args.to_dict()
-    id = args.get("id", "")
-    movieId = args.get("movieId", "")
-    episode = args.get("episode", "")
+@subscription.route('/subscribe', methods=['POST'])
+def subscribe():
+    # 获取post中的参数
+    id = request.form['id']
+    movieId = request.form['movieId']
+    episode = request.form['episode']
+    # args = request.args.to_dict()
+    # id = args.get("id","")
+    # movieId = args.get("movieId","")
+    # episode = args.get("episode","")
+    #print(id+' '+movieId+' '+episode)
 
     # 检查参数并设置返回状态码status和信息message
     status = 1
@@ -22,7 +25,7 @@ def collect():
     else:
         # 连接数据库插入
         conn = mysql_conn()
-        sql = "insert into collect values(%s, %s, %s, %s, %s)"
+        sql = "insert into subscription values(%s, %s, %s, %s, %s)"
         param = (id, movieId, 0, 18, episode)
         result = mysql_ins(conn, sql, param)
         mysql_close(conn)
@@ -35,6 +38,4 @@ def collect():
     return result_json
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
 

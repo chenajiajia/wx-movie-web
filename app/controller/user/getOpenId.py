@@ -1,12 +1,11 @@
-from flask import Flask
 from flask import request
-import json
 from urllib import request as urlRequest
-from util.dbTool import *
-app = Flask(__name__)
+from ..util.dbTool import *
+from . import user
+import json
 
 
-@app.route('/getOpenId')
+@user.route('/getOpenId')
 def getOpenId():
     jscode = request.values.get('code')
     APPID = 'wxa4123ad325278cdf'
@@ -25,7 +24,7 @@ def getOpenId():
     return json.dumps(res)
 
 
-@app.route('/login')
+@user.route('/login')
 def login():
     id = request.values.get("id")
     name = request.values.get("nickName")
@@ -51,6 +50,4 @@ def login():
     
     return json.dumps(res)
 
-if __name__ == '__main__':
-    app.run(debug=True)
 

@@ -1,11 +1,11 @@
 from flask import Flask
 from flask import request
-from util.dbTool import *
+from ..util.dbTool import *
+from . import movie
 import json
 
-app = Flask(__name__)
 
-@app.route('/getSubjectDetail', methods=['GET'])   #获取参数id=xxx的视频信息详情
+@movie.route('/getSubjectDetail', methods=['GET'])   #获取参数id=xxx的视频信息详情
 def getSubjectDetail():
     # 获取get中的id参数，get参数为request中的args，to_dict（）将其转为字典
     args = request.args.to_dict()
@@ -61,6 +61,4 @@ def getSubjectDetail():
     return result_json
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
 

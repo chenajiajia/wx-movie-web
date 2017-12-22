@@ -1,11 +1,10 @@
-from flask import Flask
 from flask import request
-from util.dbTool import *
+from app.controller.util.dbTool import *
+from . import movie
 import json
 
-app = Flask(__name__)
 
-@app.route('/getTv', methods=['GET'])   #获取参数limit后的十条电视剧信息
+@movie.route('/getTv', methods=['GET'])   #获取参数limit后的十条电视剧信息
 def getTv():
     # 获取get中的start参数，get参数为request中的args，to_dict（）将其转为字典
     args = request.args.to_dict()
@@ -56,6 +55,5 @@ def getTv():
     return result_json
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
 
