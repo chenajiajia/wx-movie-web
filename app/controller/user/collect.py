@@ -7,9 +7,11 @@ import json
 @user.route('/collect', methods=['POST'])
 def collect():
     # 获取post中的参数
-    #args = request.args.to_dict()
-    id = request.form['id']
-    movieId = request.form['movieId']
+    data = request.get_data().decode('utf8')
+    print(data)
+    json_data = json.loads(data)
+    id = json_data['id']
+    movieId = json_data['movieId']
     # 检查参数并设置返回状态码status和信息message
     status = 1
     message = "success"

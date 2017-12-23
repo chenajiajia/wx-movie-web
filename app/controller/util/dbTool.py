@@ -18,7 +18,7 @@ def mysql_conn():
         print('connect error!{}'.format(e))
         return None
     else:
-        print('connect success!')
+        #print('connect success!')
         return conn
 
 #close connector
@@ -30,7 +30,7 @@ def mysql_close(conn):
     if conn.is_connected:
         conn.close()
 
-    print('connect close!')
+    #print('connect close!')
 
 #MySQL select
 def mysql_sel(conn, sqlStr, param):

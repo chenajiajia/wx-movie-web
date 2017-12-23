@@ -7,8 +7,11 @@ import json
 @user.route('/getCollect', methods=['POST'])
 def getCollect():
     # 获取post中的参数
-    id = request.form['id']
-    start = request.form['start']
+    data = request.get_data().decode('utf8')
+    print(data)
+    json_data = json.loads(data)
+    id = json_data['id']
+    start = json_data['start']
 
     # 检查参数并设置返回状态码status和信息message
     status = 1

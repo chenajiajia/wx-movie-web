@@ -8,8 +8,11 @@ import json
 @subscription.route('/getSubscription', methods=['POST'])
 def getSubscription():
     # 获取post中的参数
-    id = request.form['id']
-    start = request.form['start']
+    data = request.get_data().decode('utf8')
+    print(data)
+    json_data = json.loads(data)
+    id = json_data['id']
+    start = json_data['start']
     #args = request.args.to_dict()
     #id = args.get("id", "")
     #movieId = args.get("movieId", "")
