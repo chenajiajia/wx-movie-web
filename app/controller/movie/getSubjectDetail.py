@@ -3,6 +3,7 @@ from flask import request
 from ..util.dbTool import *
 from . import movie
 import json
+import re
 
 
 @movie.route('/getSubjectDetail', methods=['GET'])   #获取参数id=xxx的视频信息详情
@@ -48,7 +49,9 @@ def getSubjectDetail():
             result['category'] = row[8]
             result['district'] = row[9]
             result['language'] = row[10]
-            result['showTime'] = row[11]
+            matchStr = row[11].replace(' ', '').split('/')
+            matchObj = re.match(r'\d{4}-\d{1,2}-\d{1,2}|\d{4}',matchStr[0],flags=0)
+            result['showTime'] = matchObj.group(0)
             result['episode'] = row[12]
             result['length'] = row[13]
             result['otherName'] = row[14]
