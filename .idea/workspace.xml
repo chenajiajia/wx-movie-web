@@ -23,14 +23,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="getSubjectDetail.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controller/movie/getSubjectDetail.py">
+      <file leaf-file-name="getSubscription.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controller/subscription/getSubscription.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="53" column="50" lean-forward="false" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="425">
+              <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="getCollect.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controller/user/getCollect.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="500">
+              <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -38,8 +46,8 @@
       <file leaf-file-name="getMovies.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controller/movie/getMovies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-25">
-              <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
+            <state relative-caret-position="500">
+              <caret line="36" column="19" lean-forward="false" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -78,18 +86,18 @@
         <option value="$PROJECT_DIR$/app/controller/subscribe/__init__.py" />
         <option value="$PROJECT_DIR$/app/controller/subscribe/subscribe.py" />
         <option value="$PROJECT_DIR$/app/controller/subscription/__init__.py" />
-        <option value="$PROJECT_DIR$/app/controller/subscription/getSubscription.py" />
         <option value="$PROJECT_DIR$/app/controller/subscription/subscribe.py" />
         <option value="$PROJECT_DIR$/app/controller/user/__init__.py" />
         <option value="$PROJECT_DIR$/app/controller/user/collect.py" />
         <option value="$PROJECT_DIR$/app/controller/user/getOpenId.py" />
-        <option value="$PROJECT_DIR$/app/controller/user/getCollect.py" />
         <option value="$PROJECT_DIR$/app/run.py" />
         <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/__init__.py" />
         <option value="$PROJECT_DIR$/pp/run.py" />
         <option value="$PROJECT_DIR$/run.py" />
         <option value="$PROJECT_DIR$/app/controller/movie/getSubjectDetail.py" />
+        <option value="$PROJECT_DIR$/app/controller/subscription/getSubscription.py" />
+        <option value="$PROJECT_DIR$/app/controller/user/getCollect.py" />
       </list>
     </option>
   </component>
@@ -138,6 +146,20 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
               <item name="movie" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wx-movie-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wx-movie-web" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="subscription" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wx-movie-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wx-movie-web" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -365,14 +387,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controller/user/getCollect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/user/getOpenId.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="650">
@@ -393,14 +407,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controller/subscription/getSubscription.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -463,6 +469,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controller/movie/getSubjectDetail.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="781">
+          <caret line="53" column="50" lean-forward="false" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -475,19 +491,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/movie/getMovies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-25">
-          <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
+        <state relative-caret-position="500">
+          <caret line="36" column="19" lean-forward="false" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controller/movie/getSubjectDetail.py">
+    <entry file="file://$PROJECT_DIR$/app/controller/subscription/getSubscription.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="53" column="50" lean-forward="false" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="425">
+          <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controller/user/getCollect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>

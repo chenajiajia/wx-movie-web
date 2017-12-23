@@ -9,6 +9,7 @@ import json
 def getSubscription():
     # 获取post中的参数
     id = request.form['id']
+    start = request.form['start']
     #args = request.args.to_dict()
     #id = args.get("id", "")
     #movieId = args.get("movieId", "")
@@ -18,14 +19,14 @@ def getSubscription():
     status = 1
     message = "success"
     temp_list = []
-    if id == "":
+    if id == "" or start == "":
         status = 0
-        message = "id is null"
+        message = "id or start is null"
     else:
         # 连接数据库查询
         conn = mysql_conn()
-        sql = "select movie.id,title,cover,update_episode from movie,subscription where subscription.id=%s and video_id=movie.id"
-        param = (id, )
+        sql = "select movie.id,title,cover,update_episode from movie,subscription where subscription.id=%s and video_id=movie.id limit %s,%s"
+        param = (id, int(start), 10)
         result_list = mysql_sel(conn, sql, param)
         mysql_close(conn)
         if len(result_list)==0:
