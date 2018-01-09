@@ -14,7 +14,7 @@ def setFavourite():
     # district = json_data['district']
     # decade = json_data['decade']
     del json_data['id']
-    print(json_data)
+    #print(json_data)
 
     # 检查参数并设置返回状态码status和信息message
     status = 1
@@ -31,7 +31,7 @@ def setFavourite():
         if result[0][0] != 0:
             # 连接数据库更新
             sql = "update favourite set tag = %s where id = %s"
-            param = (json_data, id)
+            param = (str(json_data), id)
             result = mysql_upd(conn, sql, param)
             mysql_close(conn)
             if result == 0:
@@ -40,7 +40,7 @@ def setFavourite():
         else :
         # 连接数据库插入
             sql = "insert into favourite values(%s, %s)"
-            param = (id, json_data)
+            param = (id, str(json_data))
             result = mysql_ins(conn, sql, param)
             mysql_close(conn)
             if result == 0:
