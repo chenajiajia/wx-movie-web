@@ -24,6 +24,8 @@ def getFavourite():
         param = (id, )
         result = mysql_sel(conn, sql, param)
         mysql_close(conn)
+        if len(result) == 0:
+            result = ""
 
     temp_json = {"status": status, "message": message, "data":result[0][0]}
     result_json = json.dumps(temp_json)
