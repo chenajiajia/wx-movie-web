@@ -9,7 +9,6 @@ import json
 def getSubscription():
     # 获取post中的参数
     data = request.get_data().decode('utf8')
-    print(data)
     json_data = json.loads(data)
     id = json_data['id']
     start = json_data['start']

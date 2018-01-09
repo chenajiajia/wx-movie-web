@@ -8,7 +8,6 @@ import json
 def collect():
     # 获取post中的参数
     data = request.get_data().decode('utf8')
-    print(data)
     json_data = json.loads(data)
     id = json_data['id']
     movieId = json_data['movieId']
