@@ -31,7 +31,7 @@ def getFavourite():
         else :
             result_data = result[0][0]
 
-    temp_json = {"status": status, "message": message, "data":result_data}
+    temp_json = {"status": status, "message": message, "data":json.loads(result_data.replace('\'','\"'))}
     result_json = json.dumps(temp_json)
     return result_json
 

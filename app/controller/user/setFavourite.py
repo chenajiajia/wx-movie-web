@@ -24,6 +24,7 @@ def setFavourite():
         message = "id is null"
     else:
         # 连接数据库查询是否有存在记录
+        print (json_data)
         conn = mysql_conn()
         sql = "select count(*) from favourite where id = %s"
         param = (id, )
@@ -39,6 +40,7 @@ def setFavourite():
                 message = "update database error"
         else :
         # 连接数据库插入
+
             sql = "insert into favourite values(%s, %s)"
             param = (id, str(json_data))
             result = mysql_ins(conn, sql, param)
