@@ -13,23 +13,28 @@ app.register_blueprint(movie, url_prefix='/movie')
 app.register_blueprint(subscription, url_prefix='/subscription')
 app.register_blueprint(user, url_prefix='/user')
 
+
 @app.before_request
 def before_request():
     url = request.path
-    id = request.values.get("user_id")
-    movieId = request.values.get("id")
+    id = request.values.get("id")
+    movieId = request.values.get("movieId")
     timestamp = time.time()
 
     print(url)
+    #根据客户端请求的url判断用户行为，记录日志，更新用户物品表
     if 'getSubjectDetail' in url :
         behaviour = '点击'
         weight = 1
     elif 'collect' in url :
         behaviour = '收藏'
         weight = 2
+    elif 'subscribe' in url:
+        behaviour = '订阅'
+        weight = 3
     else :
         return
-        # 连接数据库插入click
+        # 连接数据库插入click,记录用户行为日志
     conn = mysql_conn()
     sql = "insert into click(user_id, behaviour, weight, video_id, timestamp) values(%s, %s, %s, %s, %s)"
     param = (id, behaviour, weight, movieId, timestamp)

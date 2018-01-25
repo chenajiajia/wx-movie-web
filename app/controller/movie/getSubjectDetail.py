@@ -10,7 +10,7 @@ import re
 def getSubjectDetail():
     # 获取get中的id参数，get参数为request中的args，to_dict（）将其转为字典
     args = request.args.to_dict()
-    movieId = args.get("id", "-1")
+    movieId = args.get("movieId", "-1")
 
     #检查movieId并设置返回状态码status和信息message
     status = 1
