@@ -6,7 +6,7 @@ from app.controller.user import user
 from flask import request
 import time
 from app.controller.util.dbTool import *
-
+import json
 
 app = Flask(__name__)
 app.register_blueprint(movie, url_prefix='/movie')
@@ -17,8 +17,14 @@ app.register_blueprint(user, url_prefix='/user')
 @app.before_request
 def before_request():
     url = request.path
-    id = request.values.get("id")
-    movieId = request.values.get("movieId")
+    if request.method == 'POST' :
+        data = request.get_data().decode('utf8')
+        json_data = json.loads(data)
+        id = json_data['id']
+        movieId = json_data['movieId']
+    else:
+        id = request.args.get('id')
+        movieId = request.args.get("movieId")
     timestamp = time.time()
 
     print(url)
