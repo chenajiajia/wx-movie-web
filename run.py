@@ -21,7 +21,8 @@ def before_request():
         data = request.get_data().decode('utf8')
         json_data = json.loads(data)
         id = json_data['id']
-        movieId = json_data['movieId']
+        if 'getSubjectDetail' in url or 'collect' in url or 'subscribe' in url:
+            movieId = json_data['movieId']
     else:
         id = request.args.get('id')
         movieId = request.args.get("movieId")
