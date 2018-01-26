@@ -8,7 +8,7 @@ import json
 @movie.route('/getRecommend', methods=['GET'])
 def getRecommend():
     id = request.values.get("id")
-
+    start = request.args.get("start", 0)
     #由用户填写的数据推荐视频
     conn = mysql_conn()
     param = (id,)
@@ -18,8 +18,8 @@ def getRecommend():
     district = favourite['locate'][0] or '中国'
     category = favourite['category'][0] or '剧情'
     temp_list = []
-    sql = "select id,title,cover,rating,director,actor,category from movie where district like %s and category like %s limit 10"
-    param = ('%'+district+'%','%'+category+'%')
+    sql = "select id,title,cover,rating,director,actor,category from movie where district like %s and category like %s limit %s, 10"
+    param = ('%'+district+'%','%'+category+'%',int(start))
     result_list = mysql_sel(conn, sql, param)
 
     if len(result_list) == 0:
