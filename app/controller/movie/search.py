@@ -9,7 +9,7 @@ def search():
     # 获取get中的search内容wd参数，get参数为request中的args，to_dict（）将其转为字典
     args = request.args.to_dict()
     wd = args.get("wd")
-    start = args.get("start", "0")
+
 
     #检查wd并设置返回状态码status和信息message
     status = 1
@@ -21,8 +21,8 @@ def search():
     # 连接数据库查询
     conn = mysql_conn()
     sql = "select *,(length(title)-length(%s)) as rn from movie where title " \
-          "like %s order by rn limit %s,%s"
-    param = (wd, '%'+wd+'%', int(start), 10)
+          "like %s order by rn limit 30"
+    param = (wd, '%'+wd+'%')
     result_list = mysql_sel(conn, sql, param)
     mysql_close(conn)
     if len(result_list) == 0:
