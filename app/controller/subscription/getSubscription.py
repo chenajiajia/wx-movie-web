@@ -27,7 +27,7 @@ def getSubscription():
     else:
         # 连接数据库查询
         conn = mysql_conn()
-        sql = "select movie.id,title,cover,update_episode from movie,subscription where subscription.id=%s and video_id=movie.id limit %s,%s"
+        sql = "select movie.id,title,cover,update_episode,is_update from movie,subscription where subscription.id=%s and video_id=movie.id limit %s,%s"
         param = (id, int(start), 10)
         result_list = mysql_sel(conn, sql, param)
         mysql_close(conn)
@@ -40,6 +40,7 @@ def getSubscription():
             result['title'] = row[1]
             result['cover'] = row[2]
             result['update_episode'] = row[3]
+            result['is_update'] = row[4]
             temp_list.append(result)
 
     temp_json = {"status": status, "message": message, "data": temp_list}

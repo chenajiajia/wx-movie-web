@@ -1,0 +1,3 @@
+id;title;url;cover;rate
+26972555;美好生活;https://movie.douban.com/subject/26972555/;https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2506144624.jpg;7.9
+26924105;新笑傲江湖;https://movie.douban.com/subject/26924105/;https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2514718359.jpg;2.4

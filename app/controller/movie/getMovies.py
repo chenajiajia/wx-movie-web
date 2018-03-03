@@ -8,7 +8,6 @@ def getMovies():
     #获取get中的start参数，get参数为request中的args，to_dict（）将其转为字典
     args = request.args.to_dict()
     start = args.get("start","0")
-
     # 检查start并设置返回状态码status和信息message
     status = 1
     message = "success"

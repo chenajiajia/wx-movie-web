@@ -1,10 +1,8 @@
-from flask import Flask
-from flask import request
-from ..util.dbTool import *
-from . import movie
 import json
 import re
-
+from flask import request
+from . import movie
+from ..util.dbTool import *
 
 @movie.route('/getSubjectDetail', methods=['GET'])   #获取参数id=xxx的视频信息详情
 def getSubjectDetail():
@@ -12,6 +10,7 @@ def getSubjectDetail():
     args = request.args.to_dict()
     id = args.get("id")
     movieId = args.get("movieId")
+    form = args.get("form")
 
     #检查movieId并设置返回状态码status和信息message
     status = 1
@@ -20,18 +19,24 @@ def getSubjectDetail():
         status = 0
         message = "movieId or id is null"
 
+    # form="sub"时说明该请求来自用户点击订阅界面的视频，此时应去除更新提醒
+    if form == 'sub':
+        conn = mysql_conn()
+        sql = "update subscription set is_update=%s where id=%s and video_id=%s"
+        param = (0, id, movieId)
+        mysql_upd(conn, sql, param)
+
     # 连接数据库查询
-    conn = mysql_conn()
     sql = "select count(*) as col from collect where id=%s and video_id=%s"
     param = (id, movieId)
     result_list = mysql_sel(conn, sql, param)
     col = result_list[0][0]
-    print(result_list)
+    #print(result_list)
     sql = "select count(*) as sub from subscription where id=%s and video_id=%s"
     param = (id, movieId)
     result_list = mysql_sel(conn, sql, param)
     sub = result_list[0][0]
-    print(result_list)
+    #print(result_list)
     sql = "select * from movie where id=%s"
     param = (movieId, )
     result_list = mysql_sel(conn, sql, param)
