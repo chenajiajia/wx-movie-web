@@ -31,7 +31,7 @@ def getTv():
             message = "Can not find more video"
         for row in result_list:
             result = {}
-            result['id'] = row[0]
+            result['movieId'] = row[0]
             result['title'] = row[1]
             #result['url'] = row[2]
             result['cover'] = row[2]

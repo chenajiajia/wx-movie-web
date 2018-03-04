@@ -27,7 +27,7 @@ def getRecommend():
         message = "Can not find more video"
     for row in result_list:
         result = {}
-        result['id'] = row[0]
+        result['movieId'] = row[0]
         result['title'] = row[1]
         result['cover'] = row[2]
         result['rating'] = row[3]
@@ -78,7 +78,7 @@ def getRecommend():
                 message = "Can not find more video"
             for row in result_list:
                 result = {}
-                result['id'] = row[0]
+                result['movieId'] = row[0]
                 result['title'] = row[1]
                 result['cover'] = row[2]
                 result['rating'] = row[3]

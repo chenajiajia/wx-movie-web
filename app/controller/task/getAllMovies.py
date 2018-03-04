@@ -136,7 +136,7 @@ for tag in tags:
         if flag > 15:
             break;
         start = start + 20
-        time.sleep(1)
+        time.sleep(3)
     mysql_close(conn)
 
 fw.close()

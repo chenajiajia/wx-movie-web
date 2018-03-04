@@ -15,13 +15,13 @@ def getSubjectDetail():
     #检查movieId并设置返回状态码status和信息message
     status = 1
     message = "success"
+    conn = mysql_conn()
     if movieId == "" or id == "":   #movieId为空
         status = 0
         message = "movieId or id is null"
 
     # form="sub"时说明该请求来自用户点击订阅界面的视频，此时应去除更新提醒
     if form == 'sub':
-        conn = mysql_conn()
         sql = "update subscription set is_update=%s where id=%s and video_id=%s"
         param = (0, id, movieId)
         mysql_upd(conn, sql, param)
@@ -50,7 +50,7 @@ def getSubjectDetail():
     if status != 0:
         for row in result_list:
             result = {}
-            result['id'] = row[0]
+            result['movieId'] = row[0]
             result['title'] = row[1]
             result['url'] = row[2]
             result['cover'] = row[3]
