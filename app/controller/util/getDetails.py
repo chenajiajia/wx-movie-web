@@ -7,88 +7,7 @@
 import urllib.request, urllib.error, urllib.parse
 import time
 from bs4 import BeautifulSoup
-import mysql.connector
-from .dbTool import *
-
-config = {
-    'host': '119.29.32.91',
-    'user': 'cjj',
-    'password': 'ZHANGxj9469',
-    'port': 3306,
-    'database': 'video',
-    'charset': 'utf8'
-}
-
-#connect MySQL
-def mysql_conn():
-    try:
-        conn = mysql.connector.connect(**config)
-    except mysql.connector.Error as e:
-        print('connect error!{}'.format(e))
-        return None
-    else:
-        #print('connect success!')
-        return conn
-
-#close connector
-def mysql_close(conn):
-    '''
-    :param conn: mysql_connector
-    :return:
-    '''
-    if conn.is_connected:
-        conn.close()
-
-    #print('connect close!')
-
-#MySQL select
-def mysql_sel(conn, sqlStr, param):
-    '''
-    :param conn: mysql_connector
-    :param sqlStr: sql命令
-    :param param: 参数
-    :return: results or None
-    '''
-    if not conn.is_connected():
-        print("Connection is disconnected")
-        return None
-    cursor = conn.cursor()
-    #print(sqlStr+str(param))
-    try:
-        cursor.execute(sqlStr, param)
-        results = cursor.fetchall()
-    except mysql.connector.Error as e:
-        print('query error!{}'.format(e))
-        return None
-    else:
-        return results
-    finally:
-        cursor.close()
-
-#Mysql insert
-def mysql_ins(conn, sqlStr, param):
-    '''
-    :param conn: mysql_connector
-    :param sqlStr: sql命令
-    :param param: 参数
-    :return: 0失败/1成功
-    '''
-    if not conn.is_connected():
-        print("Connection is disconnected")
-        return 0
-    cursor = conn.cursor()
-    # print(sqlStr+str(param))
-    try:
-        cursor.execute(sqlStr, param)
-        conn.commit()
-    except mysql.connector.Error as e:
-        print('insert error!{}'.format(e))
-        conn.rollback()
-        return 0
-    else:
-        return 1
-    finally:
-        cursor.close()
+from app.controller.util.dbTool import *
 
 inputFile = 'douban_movie.txt'
 fr = open(inputFile, 'r')
@@ -126,6 +45,7 @@ for line in fr:
     else:
         result[str(movieId)] = 1
 
+    #通过请求视频url，筛选返回的HTML获取视频的详细信息
     try:
         request = urllib.request.Request(url=url,headers=headers)
         response = urllib.request.urlopen(request)
@@ -196,8 +116,6 @@ for line in fr:
     # 电影简介
         description = html.find_all("span", attrs={"property": "v:summary"})[0].get_text()
         description = description.lstrip().lstrip('\n\t').rstrip().rstrip('\n\t').replace('\n','\t')
-        print(director)
-        print(director.encode('utf8'))
         # 写入数据
         record = str(movieId) + '^' + title + '^' + url + '^' + cover + '^' + str(rate) + '^' + director + '^' + composer + '^' + actor+ '^' + category + '^' + district+ '^' + language + '^' + showtime + '^' + str(episode) +'^' + length + '^' + othername + '^' + description +'^' + imagUrl + '\n'
         sql = 'insert into movie values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
@@ -211,6 +129,7 @@ for line in fr:
     finally:
         time.sleep(3)
     count = count + 1
+    time.sleep(5)
 
 mysql_close(conn)
 print(count, errorCount)

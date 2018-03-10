@@ -7,62 +7,7 @@
 import urllib.request, urllib.parse
 import json
 import time
-import mysql.connector
-
-config = {
-    'host': '119.29.32.91',
-    'user': 'cjj',
-    'password': 'ZHANGxj9469',
-    'port': 3306,
-    'database': 'video',
-    'charset': 'utf8'
-}
-
-#connect MySQL
-def mysql_conn():
-    try:
-        conn = mysql.connector.connect(**config)
-    except mysql.connector.Error as e:
-        print('connect error!{}'.format(e))
-        return None
-    else:
-        #print('connect success!')
-        return conn
-
-#close connector
-def mysql_close(conn):
-    '''
-    :param conn: mysql_connector
-    :return:
-    '''
-    if conn.is_connected:
-        conn.close()
-
-    #print('connect close!')
-
-#MySQL select
-def mysql_sel(conn, sqlStr, param):
-    '''
-    :param conn: mysql_connector
-    :param sqlStr: sql命令
-    :param param: 参数
-    :return: results or None
-    '''
-    if not conn.is_connected():
-        print("Connection is disconnected")
-        return None
-    cursor = conn.cursor()
-    #print(sqlStr+str(param))
-    try:
-        cursor.execute(sqlStr, param)
-        results = cursor.fetchall()
-    except mysql.connector.Error as e:
-        print('query error!{}'.format(e))
-        return None
-    else:
-        return results
-    finally:
-        cursor.close()
+from app.controller.util.dbTool import *
 
 ISOTIMEFORMAT = '%Y-%m-%d %X'
 outputFile = 'douban_movie.txt'
@@ -96,10 +41,10 @@ for tag in tags:
     start = 0
     flag = 0
     conn = mysql_conn()
-    # sort=R按时间排序获取新的视频，如果获取到的视频在数据库中已存在则更换标签tag
+    # sort=R按时间排序获取新的视频，一直到获取到的视频在数据库中已存在则更换标签tag
     while True:
-        url = "https://movie.douban.com/j/new_search_subjects?sort=R&range=0,10&tags=" + urllib.parse.quote(
-            tag) + "&start=" + urllib.parse.quote(str(start))
+        url = "https://movie.douban.com/j/new_search_subjects?sort=R&range=0,10&tags="\
+              + urllib.parse.quote(tag) + "&start=" + urllib.parse.quote(str(start))
         request = urllib.request.Request(url=url)
         response = urllib.request.urlopen(request)
         movies = json.loads(response.read().decode('utf8'))['data']

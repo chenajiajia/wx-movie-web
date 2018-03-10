@@ -27,16 +27,19 @@ def getSubjectDetail():
         mysql_upd(conn, sql, param)
 
     # 连接数据库查询
+    # 查看是否已收藏
     sql = "select count(*) as col from collect where id=%s and video_id=%s"
     param = (id, movieId)
     result_list = mysql_sel(conn, sql, param)
     col = result_list[0][0]
     #print(result_list)
+    # 查看是否已订阅
     sql = "select count(*) as sub from subscription where id=%s and video_id=%s"
     param = (id, movieId)
     result_list = mysql_sel(conn, sql, param)
     sub = result_list[0][0]
     #print(result_list)
+    # 获取视频详情
     sql = "select * from movie where id=%s"
     param = (movieId, )
     result_list = mysql_sel(conn, sql, param)
@@ -46,7 +49,7 @@ def getSubjectDetail():
         message = "Can not find this video"
 
     # 查询结果转换为dictionary再转换为json传回请求者
-    temp_list = []
+    result = []
     if status != 0:
         for row in result_list:
             result = {}
@@ -61,9 +64,12 @@ def getSubjectDetail():
             result['category'] = row[8]
             result['district'] = row[9]
             result['language'] = row[10]
-            matchStr = row[11].replace(' ', '').split('/')
-            matchObj = re.match(r'\d{4}-\d{1,2}-\d{1,2}|\d{4}',matchStr[0],flags=0)
-            result['showTime'] = matchObj.group(0)
+            if row[11]!='':
+                matchStr = row[11].replace(' ', '').split('/')
+                matchObj = re.match(r'\d{4}-\d{1,2}-\d{1,2}|\d{4}', matchStr[0], flags=0)
+                result['showTime'] = matchObj.group(0)
+            else:
+                result['showTime'] = ''
             result['episode'] = row[12]
             result['length'] = row[13]
             result['otherName'] = row[14]

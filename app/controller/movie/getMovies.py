@@ -20,8 +20,8 @@ def getMovies():
     if status != 0:
         # 连接数据库查询
         conn = mysql_conn()
-        sql = "select id,title,cover,rating,director,actor,category from movie where episode=%s limit %s,%s"
-        param = ('0', int(start), 10)
+        sql = "select id,title,cover,rating,director,actor,category from movie where episode=%s and rating>%s limit %s,%s"
+        param = ('0', 6, int(start), 10)
         result_list = mysql_sel(conn, sql, param)
         mysql_close(conn)
         if len(result_list) == 0:

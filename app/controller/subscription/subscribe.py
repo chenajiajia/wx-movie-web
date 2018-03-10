@@ -1,7 +1,10 @@
-from flask import request
-from ..util.dbTool import *
-from . import subscription
 import json
+
+from flask import request
+
+from app.controller.util.getEpisode import getEp
+from . import subscription
+from ..util.dbTool import *
 
 
 @subscription.route('/subscribe', methods=['POST'])
@@ -25,10 +28,20 @@ def subscribe():
         status = 0
         message = "id or movieId or episode is null"
     else:
-        # 连接数据库插入
         conn = mysql_conn()
+        sql = "select title from movie where id=%s"
+        param = (movieId,)
+        result = mysql_sel(conn, sql, param)
+        new_episode = 0
+        try:
+            new_episode = getEp(result[0][0])
+        except Exception as e:
+            print(str(e))
+            status = 0
+            message = "get new episode fail"
+        #连接数据库插入
         sql = "insert into subscription values(%s, %s, %s, %s, %s)"
-        param = (id, movieId, 0, 18, episode)
+        param = (id, movieId, 0, new_episode, episode)
         result = mysql_ins(conn, sql, param)
         mysql_close(conn)
         if result == 0:

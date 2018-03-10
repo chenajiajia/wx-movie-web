@@ -22,7 +22,7 @@ def getTv():
     if status != 0:
         # 连接数据库查询
         conn = mysql_conn()
-        sql = "select id,title,cover,rating,director,actor,category from movie where episode!=%s limit %s,%s"
+        sql = "select id,title,cover,rating,director,actor,category from movie where episode!=%s and rating>6 limit %s,%s"
         param = ('0', int(start), 10)
         result_list = mysql_sel(conn, sql, param)
         mysql_close(conn)
