@@ -15,11 +15,6 @@ def subscribe():
     id = json_data['id']
     movieId = json_data['movieId']
     episode = json_data['episode']
-    # args = request.args.to_dict()
-    # id = args.get("id","")
-    # movieId = args.get("movieId","")
-    # episode = args.get("episode","")
-    #print(str(id)+' '+str(movieId)+' '+str(episode))
 
     # 检查参数并设置返回状态码status和信息message
     status = 1
@@ -33,8 +28,9 @@ def subscribe():
         param = (movieId,)
         result = mysql_sel(conn, sql, param)
         new_episode = 0
+        # 从360影视中爬取该视频最新的集数
         try:
-            new_episode = getEp(result[0][0])
+            new_episode = getEp(result[0][0])# 获取最新集数
         except Exception as e:
             print(str(e))
             status = 0

@@ -37,9 +37,11 @@ def getURL():
         html = response.read()
         html = BeautifulSoup(html, 'html.parser')
         if episode!=0:
-            info = html.find("div", class_="b-series-number-container g-clear").find('a')['href']
+            info = html.find("div", class_="b-series-number-container g-clear"
+                                           "").find('a')['href']
         else:
-            info = html.find("div", class_="button-container g-clear").find('a')['href']
+            info = html.find("div", class_="button-container g-clear"
+                                           "").find('a')['href']
     except Exception as e:
         print(str(e))
         status = 2

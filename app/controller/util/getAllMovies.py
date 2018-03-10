@@ -78,6 +78,7 @@ for tag in tags:
             record = str(movieId) + ';' + title + ';' + url + ';' + cover + ';' + str(rate) + '\n'
             fw.write(record)
             print(tag + '\t' + title + '\t' + str(movieId))
+            time.sleep(2)
         if flag > 15:
             break;
         start = start + 20
