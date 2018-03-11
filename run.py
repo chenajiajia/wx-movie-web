@@ -74,6 +74,7 @@ def before_request():
         if result == 0:
             status = 0
             message = "update database error"
+
 if __name__ == '__main__':
     app.run(debug=True)
 

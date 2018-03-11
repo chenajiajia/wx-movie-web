@@ -8,8 +8,8 @@ import json
 @user.route('/getOpenId')
 def getOpenId():
     jscode = request.values.get('code')
-    APPID = 'wxa4123ad325278cdf'
-    SECRET = '125a6cbbd99f928c6b0d98406842560c'
+    APPID = 'wx2da143ad9107b2fe'
+    SECRET = 'd8db03e34ba173534a9bd53b2671225f'
     url = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + APPID +\
           '&secret=' + SECRET + '&js_code='\
         + jscode + '&grant_type=authorization_code'
@@ -43,6 +43,7 @@ def login():
         sql_insert = "insert into user (id, name, sex, address, img_url)" \
                      " values( %s, %s, %s, %s, %s)"
         status = mysql_ins(conn, sql_insert, data)
+        status = 0
     res = dict()
     res['status'] = status
     res['data'] = data
