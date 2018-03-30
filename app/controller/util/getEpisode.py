@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import time
 import socket
+import ssl
 from retrying import retry
 from app.controller.util.dbTool import *
 
@@ -16,12 +17,13 @@ def getEp(title):
     url = 'https://so.360kan.com/index.php?kw=' + urllib.parse.quote(title)
     timeout = 4
     socket.setdefaulttimeout(timeout)
-    response = urllib.request.urlopen(url=url, timeout=4)
+    gcontext = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
+    response = urllib.request.urlopen(url=url, timeout=4, context=gcontext)
     html = response.read()
     html = BeautifulSoup(html, 'html.parser')
     info = html.find("div", class_="cont").find('ul').find('li').find('span').string
     result = re.sub("\D", "", info)
-    print('获取到集数：'+result)
+    print('获取到集数：' + result)
     if result == '':
         result = '0'
     return int(result)

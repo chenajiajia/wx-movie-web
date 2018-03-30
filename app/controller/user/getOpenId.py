@@ -3,6 +3,7 @@ from urllib import request as urlRequest
 from ..util.dbTool import *
 from . import user
 import json
+import ssl
 
 
 @user.route('/getOpenId')
@@ -14,7 +15,8 @@ def getOpenId():
           '&secret=' + SECRET + '&js_code='\
         + jscode + '&grant_type=authorization_code'
 
-    response = urlRequest.urlopen(url) 
+    gcontext = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
+    response = urlRequest.urlopen(url, context=gcontext)
     page = response.read()
     page = json.loads(page.decode('utf-8'))
     print(page)

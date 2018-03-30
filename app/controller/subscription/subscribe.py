@@ -1,7 +1,5 @@
 import json
-
 from flask import request
-
 from app.controller.util.getEpisode import getEp
 from . import subscription
 from ..util.dbTool import *
