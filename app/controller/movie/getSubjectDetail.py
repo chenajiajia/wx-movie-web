@@ -10,7 +10,7 @@ def getSubjectDetail():
     args = request.args.to_dict()
     id = args.get("id")
     movieId = args.get("movieId")
-    form = args.get("form")
+    where = args.get("from")
 
     #检查movieId并设置返回状态码status和信息message
     status = 1
@@ -21,7 +21,7 @@ def getSubjectDetail():
         message = "movieId or id is null"
 
     # form="sub"时说明该请求来自用户点击订阅界面的视频，此时应去除更新提醒
-    if form == 'sub':
+    if where == 'sub':
         sql = "update subscription set is_update=%s where id=%s and video_id=%s"
         param = (0, id, movieId)
         mysql_upd(conn, sql, param)
