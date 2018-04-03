@@ -15,9 +15,13 @@ def getRecommend():
     sql = "select tag from favourite where id=%s"
     result_list = mysql_sel(conn, sql, param)
     if result_list:
+        district = '中国'
+        category = '剧情'
         favourite = json.loads(result_list[0][0].replace('\'', '\"'))
-        district = favourite['locate'][0]
-        category = favourite['category'][0]
+        if len(favourite['locate']):
+            district = favourite['locate'][0]
+        if len(favourite['category']):
+            category = favourite['category'][0]
     else:
         district =  '中国'
         category =  '剧情'
