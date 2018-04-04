@@ -5,6 +5,7 @@ from flask import request
 from . import movie
 from retrying import retry
 import json
+import ssl
 
 #判断是否是异常
 def retry_if_urllib_error(exception):
@@ -33,7 +34,8 @@ def getURL():
     socket.setdefaulttimeout(timeout)
     info = ''
     try:
-        response = urllib.request.urlopen(url=url, timeout=4)
+        gcontext = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
+        response = urllib.request.urlopen(url=url, timeout=4, context=gcontext)
         html = response.read()
         html = BeautifulSoup(html, 'html.parser')
         if episode!=0:
